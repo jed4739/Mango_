@@ -15,7 +15,8 @@
         <activity android:name=".BookmarkActivity"></activity>
         <activity android:name=".JoinActivity" />
         <activity android:name=".ViewActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity"
+            tools:ignore="IntentFilterExportedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
