@@ -16,10 +16,10 @@
         <activity android:name=".JoinActivity" />
         <activity android:name=".ViewActivity" />
         <activity android:name=".SplashActivity"
-            tools:ignore="IntentFilterExportedReceiver">
+            tools:ignore="IntentFilterExportedReceiver"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
