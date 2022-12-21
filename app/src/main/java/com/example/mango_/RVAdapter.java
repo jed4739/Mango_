@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,10 +20,19 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
     private Rv_item binding;
     private Context context;
     private List list;
-    private ItemClick itemClick = null;
+    private ItemClick itemClick;
 
-    public RVAdapter(List list) {
+    public RVAdapter(Context context, List list) {
+        this.context = context;
         this.list = list;
+    }
+
+    public final ItemClick getItemClick() {
+        return itemClick;
+    }
+
+    public final void setItemClick(@Nullable ItemClick itemClick) {
+        this.itemClick = itemClick;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -30,13 +40,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
             super(itemView);
         }
 
-        public void bindItems(ContentsModel item) {
+        public void bindItems(@NonNull ContentsModel item) {
             TextView rv_text = itemView.findViewById(R.id.rvTextArea);
             ImageView rv_img = itemView.findViewById(R.id.rvImageArea);
 
             rv_text.setText(item.getTitleText());
             Glide.with(context)
-                    .load(item.imageUrl)
+                    .load(item.getImageUrl())
                     .into(rv_img);
         }
     }
@@ -60,5 +70,4 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
     public int getItemCount() {
         return list.size();
     }
-
 }

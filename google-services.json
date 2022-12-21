@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "650744268919",
+    "project_id": "mango-a3a0e",
+    "storage_bucket": "mango-a3a0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650744268919:android:3bc1db179eb31518b65e72",
+        "android_client_info": {
+          "package_name": "com.example.mango_"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650744268919-cmb5i1s99m443j8g16nfeeud3aolaqlg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0H2FkMiK-IiuGNePLRZxuzKzqb3a9_bQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650744268919-cmb5i1s99m443j8g16nfeeud3aolaqlg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

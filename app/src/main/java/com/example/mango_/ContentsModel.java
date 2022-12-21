@@ -2,12 +2,12 @@ package com.example.mango_;
 
 public class ContentsModel {
     private String url;
-    private String titleImageUrl;
+    private String imageUrl;
     private String titleText;
 
-    public ContentsModel(String url, String titleImageUrl, String titleText) {
+    public ContentsModel(String url, String imageUrl, String titleText) {
         this.url = url;
-        this.titleImageUrl = titleImageUrl;
+        this.imageUrl = imageUrl;
         this.titleText = titleText;
     }
 
@@ -15,8 +15,8 @@ public class ContentsModel {
         return url;
     }
 
-    public String getTitleImageUrl() {
-        return titleImageUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getTitleText() {
@@ -27,11 +27,14 @@ public class ContentsModel {
         this.url = url;
     }
 
-    public void setTitleImageUrl(String titleImageUrl) {
-        this.titleImageUrl = titleImageUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public void setTitleText(String titleText) {
         this.titleText = titleText;
+    }
+
+    public void test() {
     }
 }
