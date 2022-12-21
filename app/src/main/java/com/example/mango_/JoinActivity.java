@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.example.mango_.databinding.Join;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class JoinActivity extends AppCompatActivity {
@@ -28,15 +25,19 @@ public class JoinActivity extends AppCompatActivity {
         password = binding.passwordArea;
 
         binding.joinBtn.setOnClickListener(v -> {
+            Log.i("JoinActivity", "---------회원가입 버튼");
             mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
+                    .addOnCompleteListener(this, task -> {
+                        Log.i("JoinActivity","addOnCompleteListener 진입");
+                        try {
                             if (task.isSuccessful()) {
+                                Log.i("JoinActivity","addOnCompleteListener 성공");
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             } else {
                                 Log.w("JoinActivity", "createUserWithEmail:failure", task.getException());
                             }
+                        } catch (IllegalArgumentException e) {
+                            Toast.makeText(getApplicationContext(), "다시 입력해주세요.", Toast.LENGTH_SHORT).show();
                         }
                     });
         });

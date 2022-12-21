@@ -1,38 +1,35 @@
 package com.example.mango_;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.example.mango_.databinding.Splash;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.ktx.AuthKt;
-import com.google.firebase.ktx.Firebase;
-
-import kotlin.jvm.internal.Intrinsics;
 
 public class SplashActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseApp.initializeApp(this);
         super.onCreate(savedInstanceState);
         DataBindingUtil.setContentView(this, R.layout.activity_splash);
-        FirebaseApp.initializeApp(this.getApplicationContext());
         auth = FirebaseAuth.getInstance();
 
-        Log.i("dddddd", String.valueOf(auth));
-        if (auth.getCurrentUser().getUid() == null) {
-            moveMain(JoinActivity.class);
-        } else {
+//        if (auth.getCurrentUser().getUid() == null) {
+//            moveMain(JoinActivity.class);
+//        } else {
+//            moveMain(MainActivity.class);
+//        }
+        try {
+            auth.getCurrentUser().getUid();
             moveMain(MainActivity.class);
+        } catch (NullPointerException e) {
+            moveMain(JoinActivity.class);
         }
     }
     /*
