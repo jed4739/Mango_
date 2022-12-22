@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.mango_.databinding.Main;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         // 데이터가 변경되면 refresh 된다.
         binding.setLifecycleOwner(this);
+
+        binding.logoutBtn.setOnClickListener(v -> {
+            Log.i("MainActivity", "로그아웃 성공");
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(), JoinActivity.class));
+        });
 
         binding.bookmarkBtn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), BookmarkActivity.class);
@@ -105,4 +113,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
 }

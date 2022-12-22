@@ -11,6 +11,10 @@ public class ContentsModel {
         this.titleText = titleText;
     }
 
+    public ContentsModel() {
+
+    }
+
     public String getUrl() {
         return url;
     }

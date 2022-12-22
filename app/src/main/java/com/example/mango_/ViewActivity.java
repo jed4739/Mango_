@@ -21,6 +21,7 @@ public class ViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_view);
         auth = FirebaseAuth.getInstance();
+        binding.webView.loadUrl(getIntent().getStringExtra("url"));
         database = FirebaseDatabase.getInstance();
         myBookmarkRef = database.getReference("bookmark_ref");
 
@@ -28,12 +29,12 @@ public class ViewActivity extends AppCompatActivity {
         title = getIntent().getStringExtra("title");
         imageUrl = getIntent().getStringExtra("imageUrl");
 
-        binding.webView.loadUrl(getIntent().getStringExtra("url"));
-        binding.saveText.setOnClickListener(v -> {
-            myBookmarkRef
-                    .child(auth.getCurrentUser().getUid())
-                    .push()
-                    .setValue(new ContentsModel(url, imageUrl, title));
-        });
+        binding.saveText.setOnClickListener(v ->
+                myBookmarkRef
+                .child(auth.getCurrentUser().getUid())
+                .push()
+                .setValue(new ContentsModel(url, imageUrl, title)));
+
+        binding.back.setOnClickListener(v -> finish());
     }
 }
