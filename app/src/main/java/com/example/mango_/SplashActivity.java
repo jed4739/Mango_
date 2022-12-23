@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -15,20 +16,18 @@ public class SplashActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("app_test","SplashActivity.class " + "-------");
         FirebaseApp.initializeApp(this);
         super.onCreate(savedInstanceState);
         DataBindingUtil.setContentView(this, R.layout.activity_splash);
         auth = FirebaseAuth.getInstance();
 
-//        if (auth.getCurrentUser().getUid() == null) {
-//            moveMain(JoinActivity.class);
-//        } else {
-//            moveMain(MainActivity.class);
-//        }
         try {
+            Log.i("app_test","SplashActivity.class, " + "try getUid -> MainActivity.class");
             auth.getCurrentUser().getUid();
             moveMain(MainActivity.class);
         } catch (NullPointerException e) {
+            Log.i("app_test","SplashActivity.class, " + "catch NullPointException -> JoinActivity.class");
             moveMain(JoinActivity.class);
         }
     }
@@ -38,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
      * 단위 : 1초 (1000L)
      * */
     private void moveMain(Class clazz) {
+        Log.i("app_test","SplashActivity.class, " + "Splash Handler");
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             startActivity(new Intent(getApplicationContext(), clazz));
             finish();
