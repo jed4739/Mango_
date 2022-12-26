@@ -18,7 +18,6 @@ import com.example.mango_.databinding.Rv_item;
 import java.util.List;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
-    private Rv_item binding;
     private final Context context;
     private final List list;
     private ItemClick itemClick;
@@ -27,10 +26,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder> {
         Log.i("app_test","RVAdapter.class, " + "RVAdapter Constructor");
         this.context = context;
         this.list = list;
-    }
-
-    public final ItemClick getItemClick() {
-        return itemClick;
     }
 
     public final void setItemClick(@Nullable ItemClick itemClick) {

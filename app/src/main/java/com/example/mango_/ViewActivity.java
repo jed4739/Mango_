@@ -16,13 +16,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class ViewActivity extends AppCompatActivity {
     private View_ binding;
     private FirebaseAuth auth;
     private FirebaseDatabase database;
     private DatabaseReference myBookmarkRef;
     private String url, title, imageUrl;
-    private int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("app_test","ViewActivity.class " + "-------");
@@ -36,7 +37,6 @@ public class ViewActivity extends AppCompatActivity {
         url = getIntent().getStringExtra("url");
         title = getIntent().getStringExtra("title");
         imageUrl = getIntent().getStringExtra("imageUrl");
-//        position = getIntent().getIntExtra("position");
 
         binding.saveText.setOnClickListener(v -> {
             Log.i("app_test","ViewActivity.class, " + "saveText Click");
@@ -56,28 +56,28 @@ public class ViewActivity extends AppCompatActivity {
 //        if (myBookmarkRef.child(auth.getCurrentUser().getUid()).) {
 //        }
 //        Log.i("dsdfasfas", myBookmarkRef.child(auth.getCurrentUser().getUid()).orderByChild("titleText").get().toString());
-//        myBookmarkRef
-//                .child(auth.getCurrentUser().getUid())
-//                .push()
-//                .setValue(new ContentsModel(url, imageUrl, title));
-//        Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
+        myBookmarkRef
+                .child(Objects.requireNonNull(auth.getCurrentUser()).getUid())
+                .push()
+                .setValue(new ContentsModel(url, imageUrl, title));
+        Toast.makeText(getApplicationContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show();
 
-        ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//        ValueEventListener listener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
 //                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
 //                }
-                long data = snapshot.getChildrenCount();
-                if (data < 11) {
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("app_test", "ViewActivity.class, " + "addListenerForSingleValueEvent error");
-                Log.w("ViewActivity", "addListenerForSingleValueEvent:failure");
-            }
-        };
-        myBookmarkRef.child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(listener);
+//                long data = snapshot.getChildrenCount();
+//                if (data < 11) {
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Log.w("app_test", "ViewActivity.class, " + "addListenerForSingleValueEvent error");
+//                Log.w("ViewActivity", "addListenerForSingleValueEvent:failure");
+//            }
+//        };
+//        myBookmarkRef.child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(listener);
     }
 
     private void showToast(String toast) {
