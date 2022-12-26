@@ -49,6 +49,9 @@ public class ViewActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    * 데이터가 최대 12개 저장되어야함.
+    * */
     private void bookmarkSave() {
 //        if (myBookmarkRef.child(auth.getCurrentUser().getUid()).) {
 //        }
@@ -62,7 +65,10 @@ public class ViewActivity extends AppCompatActivity {
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                }
+                long data = snapshot.getChildrenCount();
+                if (data < 11) {
                 }
             }
             @Override

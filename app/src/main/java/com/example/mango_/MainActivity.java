@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         items.add(
                 new ContentsModel(
                         "https://www.mangoplate.com/restaurants/VvmJ6TnTs0av",
-                        "https://mp-seoul-image-production-s3.mangoplate.com/553325_1608092835239670.jpg?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80",
+                        "https://mp-seoul-image-production-s3.mangoplate.com/416666/1161_1609292767383_13236?fit=around|512:512&crop=512:512;*,*&output-format=jpg&output-quality=80",
                         "다운타우너"
                 )
         );
