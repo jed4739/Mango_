@@ -18,6 +18,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
+/**
+ * Map을 이용해서 Firebase에 있는 노드의 경로를 지정하고 경로대로 지우면 된다.
+ * 현재 이 키값을 어떻게 구해야할 지 난제임.
+ * 키 값을 가져오면 바로 키값을 분류하여 지우면 됨. -> 1번과 같은 말
+ * 구글 지도를 구현해야함. -> 7번 먼저 하고 한다.
+ * 12개까지 제한하는 것은 Firebase에서 요청할때 제한을 걸면 된다.*/
 public class ViewActivity extends AppCompatActivity {
     private View_ binding;
     private FirebaseAuth auth;
