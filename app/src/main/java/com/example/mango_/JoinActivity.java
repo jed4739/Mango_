@@ -20,7 +20,7 @@ public class JoinActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("app_test","JoinActivity.class " + "-------");
+        logging("--------------");
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_join);
         this.mAuth = FirebaseAuth.getInstance();
@@ -28,34 +28,31 @@ public class JoinActivity extends AppCompatActivity {
         password = binding.passwordArea;
 
         binding.joinBtn.setOnClickListener(v -> {
-            Log.i("JoinActivity", "---------로그인 버튼");
-            Log.i("app_test","JoinActivity.class, " + "---------로그인 버튼");
+            logging("-----------------로그인 버튼");
             try {
                 mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(this, task -> {
-                            Log.i("JoinActivity", "addOnCompleteListener 진입");
                             Log.i("app_test","JoinActivity.class, " + "addOnCompleteListener");
                             if (task.isSuccessful()) {
-                                Log.i("JoinActivity", "addOnCompleteListener 성공");
-                                Log.i("app_test","JoinActivity.class, " + "addOnCompleteListener task.isSuccessful true -> MainActivity.class");
+                                logging("addOnCompleteListener task.isSuccessful true -> MainActivity.class");
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             } else if (task.getException().toString().contains("FirebaseAuthInvalidCredentialsException")) {
-                                Log.i("app_test","JoinActivity.class, " + "FirebaseAuthInvalidCredentialsException -> email error");
-                                Toast.makeText(getApplicationContext(), "이메일이 잘못되었습니다.", Toast.LENGTH_SHORT).show();
+                                logging("FirebaseAuthInvalidCredentialsException -> email error");
+                                toast("이메일이 잘못되었습니다.");
                             } else if (task.getException().toString().contains("FirebaseAuthWeakPasswordException")) {
-                                Log.i("app_test","JoinActivity.class, " + "FirebaseAuthWeakPasswordException -> password error");
-                                Toast.makeText(getApplicationContext(), "비밀번호가 잘못되었습니다. 6자리 이상 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                logging("FirebaseAuthWeakPasswordException -> password error");
+                                toast("비밀번호가 잘못되었습니다. 6자리 이상 입력해주세요.");
                             } else if (task.getException().toString().contains("FirebaseAuthUserCollisionException")) {
-                                Log.i("app_test","JoinActivity.class, " + "FirebaseAuthUserCollisionException -> login");
+                                logging("FirebaseAuthUserCollisionException -> login");
                                 login();
                             } else {
-                                Log.i("app_test","JoinActivity.class, " + "addOnCompleteListener error");
+                                logging("addOnCompleteListener error");
                                 Log.w("JoinActivity", "createUserWithEmail:failure", task.getException());
                             }
                         });
             } catch (IllegalArgumentException e) {
-                Log.i("app_test","JoinActivity.class, " + "IllegalArgumentException -> editText error");
-                Toast.makeText(getApplicationContext(), "입력해주세요.", Toast.LENGTH_SHORT).show();
+                logging("IllegalArgumentException -> editText error");
+                toast("입력해주세요.");
             }
         });
 
@@ -80,6 +77,14 @@ public class JoinActivity extends AppCompatActivity {
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(email.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(password.getWindowToken(), 0);
+    }
+
+    private void toast(String toast) {
+        Toast.makeText(getApplicationContext(), toast, Toast.LENGTH_SHORT).show();
+    }
+
+    private void logging(String log) {
+        Log.i("app_test", "JoinActivity.class, " + log);
     }
 
 }
