@@ -143,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("url", items.get(position).getUrl());
             intent.putExtra("title", items.get(position).getTitleText());
             intent.putExtra("imageUrl", items.get(position).getImageUrl());
-//            intent.putExtra("position", items.get(position).getImageUrl());
             startActivity(intent);
         });
     }
